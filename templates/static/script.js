@@ -14,7 +14,7 @@ let socket = null;
 // Helper function to easily select DOM elements
 const $ = s => document.querySelector(s);
 const startBtn = $('#startBtn');
-const stopBtn  = $('#stopBtn');
+const stopBtn = $('#stopBtn');
 
 // When the user clicks the Start button
 startBtn.addEventListener('click', () => {
@@ -49,7 +49,7 @@ stopBtn.addEventListener('click', () => {
 // Function to stop the video stream and reset UI
 function stopStream() {
   if (socket) {
-    socket.close();  // Close WebSocket connection
+    socket.close();  // This triggers WebSocketDisconnect on the server
     socket = null;   // Clear socket reference
   }
   canvas.style.display = 'none'; // Hide the canvas
