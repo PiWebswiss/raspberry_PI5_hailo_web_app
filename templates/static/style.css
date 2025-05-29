@@ -46,6 +46,7 @@ header {
 }
 
 .card {
+  overflow: hidden;
   background-color: var(--panel);
   padding: 1.5rem;
   border-radius: var(--radius);
@@ -81,10 +82,10 @@ button:disabled {
 }
 
 
-img,
-video {
+canvas {
   display: block;
   max-width: 100%;
+  height: auto;
   border-radius: var(--radius);
   margin: 1rem auto;
 }
