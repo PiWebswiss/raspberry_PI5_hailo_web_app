@@ -4,6 +4,8 @@ I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and
 
 To use this application, please install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md).
 
+![alt text](templates/static/ressources/web_app_live.png)
+
 ---
 
 ### Install Requirements
@@ -21,7 +23,7 @@ Make sure to also install the [DeGirum SDK](https://github.com/DeGirum/hailo_exa
 1. **Activate the ``degirum_env`` virtual environment**:
 
    ```bash
-   source degirum_env/bin/activate
+   source ../degirum_env/bin/activate
    ```
 
 2. **Start the FastAPI server**:
