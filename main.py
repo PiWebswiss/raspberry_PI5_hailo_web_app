@@ -1,3 +1,4 @@
+# Modifiey code from https://github.com/PiWebswiss/raspberry_PI5_hailo/blob/web-app/WebSocket/main.py
 import time
 import cv2
 import degirum as dg
@@ -25,6 +26,7 @@ model = dg.load_model(
 )
 
 # FastAPI setup
+# Help : https://chatgpt.com/c/683ebaec-e754-800e-b3db-77546297fbce
 BASE_DIR = Path(__file__).resolve().parent
 app = FastAPI()
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -34,14 +36,13 @@ app.mount(
     name="static",
 )
 
-
 # Routes for index page
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# Modifiey code from https://github.com/PiWebswiss/raspberry_PI5_hailo/blob/web-app/WebSocket/main.py
+
 # WebSocket endpoint for real-time video streaming with FPS
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -49,7 +50,7 @@ async def websocket_endpoint(websocket: WebSocket):
     cap = cv2.VideoCapture(0)
 
     # Check that the camera is accessible
-    # code from : https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
+    # Code from : https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
     if not cap.isOpened():
         print("⚠️  No camera detected!")
         # Reject WebSocket with proper close code
@@ -67,6 +68,7 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Read a frame from the camera in a background thread
+            # https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
             ret, frame = await asyncio.to_thread(cap.read)
             if not ret:
                 break  # Stop if the camera failed
@@ -83,12 +85,15 @@ async def websocket_endpoint(websocket: WebSocket):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                         (0, 255, 0), 2, cv2.LINE_AA)
 
+            # Code de // https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
+
             # Encode the annotated frame as JPEG
             success, jpg = cv2.imencode('.jpg', frm)
             if not success:
                 continue  # Skip this frame if encoding fails
 
             # Try to send the JPEG over WebSocket
+            # Code de // https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
             try:
                 await websocket.send_bytes(jpg.tobytes())
             except Exception:
