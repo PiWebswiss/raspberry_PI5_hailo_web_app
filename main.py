@@ -69,24 +69,31 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Read a frame from the camera in a background thread
             # https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
+            # off-load the heavy work, keep the server responsive, get the result when it’s ready
             ret, frame = await asyncio.to_thread(cap.read)
             if not ret:
                 break  # Stop if the camera failed
 
             # Run inference on the frame (also off the main async thread)
+            # off-load the heavy work, keep the server responsive, get the result when it’s ready
             inf = await asyncio.to_thread(model, frame)
             frm = inf.image_overlay
 
             # Calculate and draw FPS on the frame
+            #  Get the current time
             now = time.time()
+            # Compute the FPS (Frames Per Second)
+            # 1) (now - prev_frame_time) = time elapsed between two frames (seconds)
+            # 2) 1 / elapsed_time        = number of frames processed per second
             fps = 1 / (now - prev_frame_time)
+            # Store the current time for the next iteration
             prev_frame_time = now
+            # Draw the FPS value on the image
             cv2.putText(frm, f"FPS: {fps:.0f}", (20, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                         (0, 255, 0), 2, cv2.LINE_AA)
 
             # Code de // https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
-
             # Encode the annotated frame as JPEG
             success, jpg = cv2.imencode('.jpg', frm)
             if not success:
