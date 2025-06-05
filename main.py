@@ -11,18 +11,12 @@ from starlette.websockets import WebSocketState
 import asyncio
 
 # Load Hailo model
-inference_host_address = "@local"
-zoo_url = "degirum/hailo"
-token = ""
-device_type = "HAILORT/HAILO8L"
-model_name = "yolov8n_relu6_coco--640x640_quant_hailort_hailo8l_1"
-
 model = dg.load_model(
-    model_name=model_name,
-    inference_host_address=inference_host_address,
-    zoo_url=zoo_url,
-    token=token,
-    device_type=device_type
+    model_name="yolov8n_relu6_coco--640x640_quant_hailort_hailo8l_1",
+    inference_host_address="@local",
+    zoo_url="degirum/hailo",
+    token="",
+    device_type="HAILORT/HAILO8L",
 )
 
 # FastAPI setup
