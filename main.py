@@ -12,9 +12,9 @@ import asyncio
 
 # Load Hailo model
 model = dg.load_model(
-    model_name="yolov8n_relu6_coco--640x640_quant_hailort_hailo8l_1",
+    model_name="yolov11n",
     inference_host_address="@local",
-    zoo_url="degirum/hailo",
+    zoo_url="hailo_model",
     token="",
     device_type="HAILORT/HAILO8L",
 )
