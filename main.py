@@ -12,12 +12,20 @@ import asyncio
 
 # Load Hailo model
 model = dg.load_model(
-    model_name="yolov11n",
+    model_name="my_yolov11n", # yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1
     inference_host_address="@local",
-    zoo_url="hailo_model",
+    zoo_url="hailo_model", # ""
     token="",
     device_type="HAILORT/HAILO8L",
 )
+
+""" model = dg.load_model(
+    model_name="yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1", 
+    inference_host_address="@local",
+    zoo_url="degirum/hailo", 
+    token="",
+    device_type="HAILORT/HAILO8L",
+) """
 
 # FastAPI setup
 # Help : https://chatgpt.com/c/683ebaec-e754-800e-b3db-77546297fbce
