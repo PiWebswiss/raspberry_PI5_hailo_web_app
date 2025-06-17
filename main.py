@@ -10,11 +10,12 @@ from fastapi.staticfiles import StaticFiles
 from starlette.websockets import WebSocketState
 import asyncio
 
+
 # Load Hailo model
 model = dg.load_model(
-    model_name="my_yolov11n", # yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1
+    model_name="my_yolov11n", # Model name
     inference_host_address="@local",
-    zoo_url="hailo_model", # ""
+    zoo_url="hailo_model", # link to the custom model folder
     token="",
     device_type="HAILORT/HAILO8L",
 )

@@ -1,3 +1,5 @@
+# Code from : https://community.hailo.ai/t/user-guide-3-simplifying-object-detection-on-a-hailo-device-using-degirum-pysdk/10711
+
 import numpy as np
 import json
 
