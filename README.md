@@ -1,56 +1,87 @@
-## Raspberry Pi 5 Running Hailo Model with a FastAPI Server.
+## Raspberry Pi 5 with Hailo AI and FastAPI
 
+This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perform real-time object detection on video streams and broadcast the annotated output to a web page via FastAPI.
 
-I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page using FastAPI routes.
+**Screenshot of the web app**
+![web_app_live](templates/static/ressources/web_app_live.png)
 
-To use this application, please install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md).
+**Screenshot of the web app displaying live object detection results.**
+![Screenshot_web_app_live](Screenshot_web_app_live.png)
+---
 
-![alt text](templates/static/ressources/web_app_live.png)
+### Repository Structure
+
+* **Server code**: FastAPI application and WebSocket handlers
+* **Pre-trained AI model**: YOLO model weights
+* **Web interface**: HTML/CSS templates and static assets
+* **Utility scripts**:
+
+  * Training the YOLO model
+  * Compiling the model for the Hailo accelerator
+
+**Train the model (Colab notebook):**
+[Yolo Train](https://colab.research.google.com/drive/1kkYMit4gj5RQPTyDT4U0StDJmXVad0Oz?usp=sharing)
+
+**Compile for Hailo (Colab notebook):**
+[Compile Hailo Model](https://colab.research.google.com/drive/1cI-a5BHdVLQiYJJdzprg2WqeuU2pA_YQ?usp=drive_link)
 
 ---
 
-### The repository contains the following components:
+### Prerequisites
 
-* The source code of the server
-* Our pre-trained artificial intelligence model
-* The web graphical interface (designed in HTML and CSS)
-* You will also find the necessary scripts to:
-
-  * Train the YOLO model
-  * Compile the model for the Hailo accelerator
-
-**Colab notebook to train the model:**
-[Yolo train](https://colab.research.google.com/drive/1kkYMit4gj5RQPTyDT4U0StDJmXVad0Oz?usp=sharing)
-
-**Colab notebook to compile the model for Hailo:**
-[Compile hailo model](https://colab.research.google.com/drive/1cI-a5BHdVLQiYJJdzprg2WqeuU2pA_YQ?usp=drive_link)
-
+* **DeGirum PySDK**: Install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md) to manage loading and inference of the Hailo model in Python.
 
 ---
 
-### Install Requirements
+### Setup
 
-```bash
-pip install fastapi uvicorn
-```
-
-Make sure to also install the [DeGirum SDK](https://github.com/DeGirum/hailo_examples) as described in their documentation.
-
----
-
-### To Run the Server
-
-1. **Activate the ``degirum_env`` virtual environment**:
+1. **Clone the repository**
 
    ```bash
-   source ../degirum_env/bin/activate
+   git clone https://github.com/DeGirum/hailo_examples.git
+   cd hailo_examples
    ```
 
-2. **Start the FastAPI server**:
+2. **Create and activate a virtual environment**
+
+   ```bash
+   python3 -m venv degirum_env
+   source degirum_env/bin/activate
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Register the virtual environment in Jupyter (optional)**
+
+   ```bash
+   python -m ipykernel install --user --name=degirum_env --display-name "Python (degirum_env)"
+   ```
+
+5. **Install FastAPI and Uvicorn**
+
+   ```bash
+   pip install fastapi uvicorn
+   ```
+
+---
+
+### Running the Server
+
+1. **Activate the virtual environment**
+
+   ```bash
+   source degirum_env/bin/activate
+   ```
+
+2. **Start the FastAPI server**
 
    ```bash
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
-3. **Access Video Stream**:
-   - Open a web browser and navigate to `http://127.0.0.1:8001/`view the AI-processed video stream.
 
+3. **View the stream**
+   Open your browser to `http://127.0.0.1:8000/` to see the AI-processed video.
