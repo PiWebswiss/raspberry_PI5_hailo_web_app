@@ -1,4 +1,4 @@
-# Modifiey code from https://github.com/PiWebswiss/raspberry_PI5_hailo/blob/web-app/WebSocket/main.py
+# Modified code from https://github.com/PiWebswiss/raspberry_PI5_hailo/blob/web-app/WebSocket/main.py
 import time
 import cv2
 import degirum as dg
@@ -12,6 +12,7 @@ import asyncio
 
 
 # Load Hailo model
+## 1. Load costume model
 model = dg.load_model(
     model_name="my_yolov11n", # Model name
     inference_host_address="@local",
@@ -20,6 +21,7 @@ model = dg.load_model(
     device_type="HAILORT/HAILO8L",
 )
 
+## 2. Load Hailo model (yolo11n)
 """ model = dg.load_model(
     model_name="yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1", 
     inference_host_address="@local",
