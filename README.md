@@ -38,7 +38,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/PiWebswiss/raspberry_PI5_hailo-web-app.git
+   git clone https://github.com/DeGirum/hailo_examples.git
    cd hailo_examples
    ```
 
@@ -67,21 +67,28 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
    pip install fastapi uvicorn
    ```
 
+6. **Clone this GitHub repository**
+
+ ```bash
+   https://github.com/PiWebswiss/raspberry_PI5_hailo_web_app.git
+   cd raspberry_PI5_hailo_web_app
+   ```
 ---
 
 ### Running the Server
 
 1. **Activate the virtual environment**
+   Make sure that the virtual environment is activated and that you are in the `raspberry_PI5_hailo_web_app` folder.
 
    ```bash
-   source degirum_env/bin/activate
+   source ../degirum_env/bin/activate
    ```
 
-2. **Start the FastAPI server**
+3. **Start the FastAPI server**
 
    ```bash
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
 
-3. **View the stream**
+4. **View the stream**
    Open your browser to `http://127.0.0.1:8000/` to see the AI-processed video.
