@@ -73,7 +73,7 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Read a frame from the camera in a background thread
-            # https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
+            # Code from: https://chatgpt.com/share/683867a8-db8c-800e-ae13-1b2fcdfee4ee
             # off-load the heavy work, keep the server responsive, get the result when it’s ready
             ret, frame = await asyncio.to_thread(cap.read)
             if not ret:
@@ -89,7 +89,7 @@ async def websocket_endpoint(websocket: WebSocket):
             now = time.time()
             # Compute the FPS (Frames Per Second)
             # 1) (now - prev_frame_time) = time elapsed between two frames (seconds)
-            # 2) 1 / elapsed_time        = number of frames processed per second
+            # 2) 1 / elapsed_time = number of frames processed per second
             fps = 1 / (now - prev_frame_time)
             # Store the current time for the next iteration
             prev_frame_time = now
@@ -98,14 +98,14 @@ async def websocket_endpoint(websocket: WebSocket):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                         (0, 255, 0), 2, cv2.LINE_AA)
 
-            # Code de // https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
+            # Code from: https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
             # Encode the annotated frame as JPEG
             success, jpg = cv2.imencode('.jpg', frm)
             if not success:
                 continue  # Skip this frame if encoding fails
 
             # Try to send the JPEG over WebSocket
-            # Code de // https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
+            # Code from: https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d
             try:
                 await websocket.send_bytes(jpg.tobytes())
             except Exception:
@@ -120,10 +120,3 @@ async def websocket_endpoint(websocket: WebSocket):
         # Gracefully close the WebSocket if it's still open
         if websocket.application_state == WebSocketState.CONNECTED:
             await websocket.close()
-
-  
-
-            
-
-
-
