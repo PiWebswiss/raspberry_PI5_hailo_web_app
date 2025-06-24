@@ -148,6 +148,9 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 * [**Hailo RPi5 Official Examples**](https://github.com/hailo-ai/hailo-rpi5-examples)
   Community-maintained examples for running Hailo AI on Raspberry Pi 5.
 
+* [**Reference Script – WebSocket with FastAPI**](https://github.com/PiWebswiss/raspberry_PI5_hailo/blob/web-app/WebSocket/main.py)
+  Example of a FastAPI server using WebSocket to stream YOLO (v8/v11) detection results in real time, accelerated by the Hailo-8L chip on Raspberry Pi 5.
+
 * [**Alternative YOLO Pi Repository**](https://github.com/LukeDitria/RasPi_YOLO)
   Community project using YOLO on Raspberry Pi with integrated camera support.
 
