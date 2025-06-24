@@ -148,9 +148,6 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 * [**Hailo RPi5 Official Examples**](https://github.com/hailo-ai/hailo-rpi5-examples)
   Community-maintained examples for running Hailo AI on Raspberry Pi 5.
 
-* [**Project GitHub Repository**](https://github.com/PiWebswiss/raspberry_PI5_hailo-web-app)
-  Source code for the real-time object detection web application.
-
 * [**Alternative YOLO Pi Repository**](https://github.com/LukeDitria/RasPi_YOLO)
   Community project using YOLO on Raspberry Pi with integrated camera support.
 
