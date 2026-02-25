@@ -72,7 +72,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 6. **Clone this GitHub repository**
 
  ```bash
-   https://github.com/PiWebswiss/raspberry_PI5_hailo_web_app.git
+   git clone https://github.com/PiWebswiss/raspberry_PI5_hailo_web_app.git
    cd raspberry_PI5_hailo_web_app
    ```
 ---
