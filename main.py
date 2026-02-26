@@ -13,22 +13,22 @@ import asyncio
 
 # Load Hailo model
 ## 1. Load costume model
-model = dg.load_model(
+""" model = dg.load_model(
     model_name="my_yolov11n", # Model name
     inference_host_address="@local",
     zoo_url="hailo_model", # link to the custom model folder
     token="",
     device_type="HAILORT/HAILO8L",
-)
+) """
 
 ## 2. Load Hailo model (yolo11n)
-""" model = dg.load_model(
+model = dg.load_model(
     model_name="yolo11n_coco--640x640_quant_hailort_multidevice_1", 
     inference_host_address="@local",
     zoo_url="degirum/hailo", 
     token="",
     device_type="HAILORT/HAILO8L",
-) """
+)
 
 # FastAPI setup
 # Help : https://chatgpt.com/c/683ebaec-e754-800e-b3db-77546297fbce
@@ -66,6 +66,8 @@ async def websocket_endpoint(websocket: WebSocket):
     cap.set(cv2.CAP_PROP_FRAME_WIDTH,  640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     prev_frame_time = time.time()
+
+    print("✅  Camera initialized, starting stream...")
 
     # Accept the WebSocket connection
     await websocket.accept()
@@ -110,7 +112,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 await websocket.send_bytes(jpg.tobytes())
             except Exception:
                 # If the client disconnected or network error → exit loop
-                print("Send stopped (client disconnected?)")
+                print("⚠️  Streaming stopped")
                 break
 
     finally:
