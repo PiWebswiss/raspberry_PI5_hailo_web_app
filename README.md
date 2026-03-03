@@ -57,7 +57,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
    pip install -r requirements.txt
    ```
 
-4. **Register the virtual environment in Jupyter (optional)**
+4. **Register the virtual environment in Jupyter**
 
    ```bash
    python -m ipykernel install --user --name=degirum_env --display-name "Python (degirum_env)"
@@ -98,7 +98,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 
 ---
 
-## People Count (How It Works)
+## People Count
 
 The web UI shows two live counters:
 
@@ -113,14 +113,12 @@ The web UI shows two live counters:
 4. If no previous track matches, a new track ID is created.
 5. `Unique persons` increases only when a brand-new track ID appears.
 
-### Limits (important)
+### Limits
 
 * This is **tracking-based**, not true identity recognition.
-* The same real person can be counted again if they disappear (occlusion/out of frame) and later come back as a new track.
+* The same real person can be counted again if they disappear (out of frame) and later come back as a new track.
 * Two people very close together can sometimes swap tracks.
-* Fast motion, blur, or missed detections can reduce accuracy.
 
-So, `Unique persons` means **unique track IDs during the session**, not guaranteed unique human identities.
 
 ---
 
