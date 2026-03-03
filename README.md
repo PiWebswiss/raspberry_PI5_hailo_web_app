@@ -98,6 +98,32 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 
 ---
 
+## People Count (How It Works)
+
+The web UI shows two live counters:
+
+* **Persons now**: how many tracked people are visible in the current frame.
+* **Unique persons**: how many different tracked people have been seen since the stream started.
+
+### Simple logic used
+
+1. The model detects objects and keeps only detections labeled `person`.
+2. For each detected person, the app uses the center of the bounding box.
+3. Across frames, the app matches each center to the closest previous track (if close enough).
+4. If no previous track matches, a new track ID is created.
+5. `Unique persons` increases only when a brand-new track ID appears.
+
+### Limits (important)
+
+* This is **tracking-based**, not true identity recognition.
+* The same real person can be counted again if they disappear (occlusion/out of frame) and later come back as a new track.
+* Two people very close together can sometimes swap tracks.
+* Fast motion, blur, or missed detections can reduce accuracy.
+
+So, `Unique persons` means **unique track IDs during the session**, not guaranteed unique human identities.
+
+---
+
 ## Sources & References
 
 ### Official Raspberry Pi Documentation & Hardware
@@ -197,5 +223,4 @@ These were used to assist with debugging, optimization, and development choices.
 * [Chat 1](https://chatgpt.com/c/6838601a-6ee0-800e-afb3-1a5636e2fb01)
 * [Chat 2](https://chatgpt.com/share/6838291d-cdf4-800e-af62-9ae145e8e58f)
 * [Chat 3](https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d)
-
 
